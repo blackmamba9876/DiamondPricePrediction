@@ -1,4 +1,4 @@
-# src/components/data_ingestion.py
+
 import os
 import sys
 from src.logger import logging
@@ -9,9 +9,9 @@ from dataclasses import dataclass
 
 @dataclass
 class DataIngestionconfig:
-    train_data_path=os.path.join('artifacts','train.csv')
-    test_data_path=os.path.join('artifacts','test.csv')
-    raw_data_path=os.path.join('artifacts','raw.csv')
+    train_data_path:str=os.path.join('artifacts','train.csv')
+    test_data_path:str=os.path.join('artifacts','test.csv')
+    raw_data_path:str=os.path.join('artifacts','raw.csv')
 
 class DataIngestion:
     def __init__(self):
@@ -35,7 +35,10 @@ class DataIngestion:
 
             logging.info('Ingestion of data is completed')
 
-            return self.ingestion_config.train_data_path, self.ingestion_config.test_data_path
+            return (
+                self.ingestion_config.train_data_path, 
+                self.ingestion_config.test_data_path
+            )
 
         except Exception as e:
             logging.info('Error occurred in Data Ingestion config')
